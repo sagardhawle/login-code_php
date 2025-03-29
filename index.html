@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast - Auth</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Signup Form -->
+        <div id="signupSection">
+            <h2>Weather Forecast Signup</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" name="username" required>
+                    <div class="error" id="signupUsernameError">Username must be at least 3 characters</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="email" required>
+                    <div class="error" id="signupEmailError">Please enter a valid email</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" required>
+                    <div class="error" id="signupPasswordError">Password must be at least 6 characters</div>
+                </div>
+                <button type="submit">Sign Up</button>
+                <div class="message" id="signupMessage"></div>
+            </form>
+            <div class="toggle-link">
+                Already have an account? <a onclick="showSignin()">Sign in here</a>
+            </div>
+        </div>
+
+        <!-- Signin Form -->
+        <div id="signinSection" class="hidden">
+            <h2>Weather Forecast Signin</h2>
+            <form id="signinForm">
+                <div class="form-group">
+                    <label for="signinUsername">Username</label>
+                    <input type="text" id="signinUsername" name="username" required>
+                    <div class="error" id="signinUsernameError">Username is required</div>
+                </div>
+                <div class="form-group">
+                    <label for="signinPassword">Password</label>
+                    <input type="password" id="signinPassword" name="password" required>
+                    <div class="error" id="signinPasswordError">Password is required</div>
+                </div>
+                <button type="submit">Sign In</button>
+                <div class="message" id="signinMessage"></div>
+            </form>
+            <div class="toggle-link">
+                Don't have an account? <a onclick="showSignup()">Sign up here</a>
+            </div>
+        </div>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
