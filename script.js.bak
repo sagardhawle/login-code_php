@@ -1,0 +1,124 @@
+function showSignup() {
+    document.getElementById('signupSection').classList.remove('hidden');
+    document.getElementById('signinSection').classList.add('hidden');
+}
+
+function showSignin() {
+    document.getElementById('signupSection').classList.add('hidden');
+    document.getElementById('signinSection').classList.remove('hidden');
+}
+
+// Signup Form Handler
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const signupMessage = document.getElementById('signupMessage');
+    document.querySelectorAll('#signupSection .error').forEach(error => error.style.display = 'none');
+    signupMessage.style.display = 'none';
+    signupMessage.className = 'message';
+
+    const username = document.getElementById('signupUsername').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value;
+
+    let isValid = true;
+
+    if (username.length < 3) {
+        document.getElementById('signupUsernameError').style.display = 'block';
+        isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById('signupEmailError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (password.length < 6) {
+        document.getElementById('signupPasswordError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    fetch('/php/signup.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            signupMessage.textContent = 'Signup successful! Switching to signin...';
+            signupMessage.className = 'message success';
+            signupMessage.style.display = 'block';
+            this.reset();
+            
+            setTimeout(() => {
+                showSignin();
+                document.getElementById('signinUsername').value = username;
+            }, 1500);
+        } else {
+            signupMessage.textContent = data.message;
+            signupMessage.className = 'message error';
+            signupMessage.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        signupMessage.textContent = 'Error occurred during signup';
+        signupMessage.className = 'message error';
+        signupMessage.style.display = 'block';
+    });
+});
+
+// Signin Form Handler
+document.getElementById('signinForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const signinMessage = document.getElementById('signinMessage');
+    document.querySelectorAll('#signinSection .error').forEach(error => error.style.display = 'none');
+    signinMessage.style.display = 'none';
+    signinMessage.className = 'message';
+
+    const username = document.getElementById('signinUsername').value.trim();
+    const password = document.getElementById('signinPassword').value;
+
+    let isValid = true;
+
+    if (!username) {
+        document.getElementById('signinUsernameError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!password) {
+        document.getElementById('signinPasswordError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    fetch('/php/signin.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            signinMessage.textContent = 'Signin successful! Redirecting...';
+            signinMessage.className = 'message success';
+            signinMessage.style.display = 'block';
+            this.reset();
+            setTimeout(() => console.log('Redirecting to dashboard...'), 2000);
+        } else {
+            signinMessage.textContent = data.message;
+            signinMessage.className = 'message error';
+            signinMessage.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        signinMessage.textContent = 'Error occurred during signin';
+        signinMessage.className = 'message error';
+        signinMessage.style.display = 'block';
+    });
+});

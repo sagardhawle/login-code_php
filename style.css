@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4facfe;
+    box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: #4facfe;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #00f2fe;
+}
+
+.message {
+    text-align: center;
+    margin-top: 1rem;
+    display: none;
+}
+
+.message.success {
+    color: green;
+}
+
+.message.error {
+    color: red;
+}
+
+.toggle-link {
+    text-align: center;
+    margin-top: 1rem;
+    color: #555;
+}
+
+.toggle-link a {
+    color: #4facfe;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.toggle-link a:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
